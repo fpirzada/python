@@ -1,0 +1,142 @@
+<!doctype html>
+<html class="no-js" lang="zxx">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="author" content="John Doe">
+    <meta name="description" content="">
+    <meta name="keywords" content="HTML,CSS,XML,JavaScript">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Title -->
+    <title>Home</title>
+    <!-- Place favicon.ico in the root directory -->
+    <!-- Plugin-CSS -->
+    <link rel="stylesheet" href="{{ static_url('frontPage/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{ static_url('frontPage/css/owl.carousel.min.css')}}">
+    <link rel="stylesheet" href="{{ static_url('frontPage/css/themify-icons.css')}}">
+    <link rel="stylesheet" href="{{ static_url('frontPage/css/magnific-popup.css')}}">
+    <link rel="stylesheet" href="{{ static_url('frontPage/css/animate.css')}}">
+    <!-- Main-Stylesheets -->
+    <link rel="stylesheet" href="{{ static_url('frontPage/css/normalize.css')}}">
+    <link rel="stylesheet" href="{{ static_url('frontPage/style.css')}}">
+    <link rel="stylesheet" href="{{ static_url('frontPage/css/responsive.css')}}">
+    <script src="{{ static_url('frontPage/js/vendor/modernizr-2.8.3.min.js')}}"></script>
+
+
+    <!-- Insert this line above script imports  -->
+<script>
+
+function Aqua() {
+   var getInput = "aquasolutionsco_co_uk_db";
+   localStorage.setItem("DB_name",getInput);
+   var Web = "aquasolutionsco.co.uk";
+   localStorage.setItem("Website",Web);
+}
+function viking() {
+   var getInput = "viking";
+   localStorage.setItem("DB_name",getInput);
+}
+function AirComp() {
+   var getInput = "airComp";
+   localStorage.setItem("DB_name",getInput);
+}
+
+    </script>
+
+</head>
+
+
+
+<body data-spy="scroll" data-target="#primary-menu">
+
+    <div class="preloader">
+        <div class="sk-folding-cube">
+            <div class="sk-cube1 sk-cube"></div>
+            <div class="sk-cube2 sk-cube"></div>
+            <div class="sk-cube4 sk-cube"></div>
+            <div class="sk-cube3 sk-cube"></div>
+        </div>
+    </div>
+    <!--Mainmenu-area-->
+    <div class="mainmenu-area" data-spy="affix" data-offset-top="100">
+        <div class="container">
+            <!--Logo-->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#primary-menu">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="#" class="navbar-brand logo">
+                    <h2>Feed Tec</h2>
+                </a>
+            </div>
+            <!--Logo/-->
+
+        </div>
+    </div>
+    <!--Mainmenu-area/-->
+
+
+
+    <!--Header-area-->
+    <header class="header-area overlay full-height relative v-center" id="home-page">
+        <div class="absolute anlge-bg"></div>
+        <div class="container">
+            <div class="row v-center">
+                <div class="col-xs-12 col-md-12 header-text">
+                 <div class="price-table">
+                        <h3 class="text-uppercase price-title">Select the site</h3>
+                        <hr>
+                     <form action="dashboard" method="get" >
+                         <input type="hidden" name ="name" value="Aqua" />
+                            <input type="submit" value="Aqua" />
+                        <ul class="list-unstyled">
+                            <li>
+                               <button onclick="viking()">Viking</button>
+                                <!--<button onclick="myFunction()">Click me</button>-->
+
+                            </li>
+                             <li>
+
+                                 <button onclick="Aqua()">Aqua</button>
+
+                            </li>
+                             <li>
+                                     <button onclick="AirComp()">Viking</button>
+
+                            </li>
+
+                        </ul>
+                      </form>
+                        <hr>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </header>
+    <!--Header-area/-->
+
+
+
+
+
+    <!--Vendor-JS-->
+    <script src="{{ static_url('frontPage/js/vendor/jquery-1.12.4.min.js')}}"></script>
+    <script src="{{ static_url('frontPage/js/vendor/bootstrap.min.js')}}"></script>
+    <!--Plugin-JS-->
+    <script src="{{ static_url('frontPage/js/owl.carousel.min.js')}}"></script>
+    <script src="{{ static_url('frontPage/js/contact-form.js')}}"></script>
+    <script src="{{ static_url('frontPage/js/jquery.parallax-1.1.3.js')}}"></script>
+    <script src="{{ static_url('frontPage/js/scrollUp.min.js')}}"></script>
+    <script src="{{ static_url('frontPage/js/magnific-popup.min.js')}}"></script>
+    <script src="{{ static_url('frontPage/js/wow.min.js')}}"></script>
+    <!--Main-active-JS-->
+    <script src="{{ static_url('frontPage/js/main.js')}}"></script>
+
+</body>
+
+</html>
