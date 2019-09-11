@@ -13,24 +13,26 @@ import urllib.request
 import time
 import mysql.connector
 
-options = Options()
-options.headless = True
-caps = DesiredCapabilities().FIREFOX
-caps["marionette"] = True
 
-driver = webdriver.Firefox(
-    capabilities=caps,
-    options=options,
-    executable_path=r'/Users/farhanpirzada/PycharmProjects/Express-matting/geckodriver'
-)
 
-driver.get("https://accounts.google.com/signin/v2/identifier?flowName=GlifWebSignIn&flowEntry=ServiceLogin")
+def mainWeb(re_enter,cpc_amount,id):
+    options = Options()
+    options.headless = True
+    caps = DesiredCapabilities().FIREFOX
+    caps["marionette"] = True
 
-# driver.delete_all_cookies()
+    driver = webdriver.Firefox(
+        capabilities=caps,
+        options=options,
+        executable_path=r'/Users/farhanpirzada/PycharmProjects/Express-matting/geckodriver')
 
-def mainWeb(re_enter):
+    driver.get("https://accounts.google.com/signin/v2/identifier?flowName=GlifWebSignIn&flowEntry=ServiceLogin")
+
+    # driver.delete_all_cookies()
+
     if re_enter == False:
         try:
+            print("-- WELCOME TO THE CHANGE YOUR CPC PAGE --")
             driver.execute_script("window.open('about:blank','tab2');")
             driver.switch_to.window("tab2")
             driver.maximize_window()
@@ -59,9 +61,10 @@ def mainWeb(re_enter):
             user = driver.find_element_by_name("password")
             user.send_keys(Keys.ENTER)
             time.sleep(3)
-        except:
+        except Exception as e:
             print("Can't enter into the account LOGIN ERROR!!")
-            mainWeb(re_enter)
+            print(e)
+            mainWeb(re_enter, cpc_amount, id)
 
     try:
         ## end
@@ -90,56 +93,73 @@ def mainWeb(re_enter):
 
     element = driver.find_element_by_css_selector(".ess-table-canvas.mouse-active")
     print(element.get_attribute("class"))
-    for x in range(1, 250):
+    isTrue = True
 
-        print("-" + str(x))
-        i += 1
-        if i == 10:
-            print("wait")
-            i = 0
-        element.send_keys(Keys.PAGE_DOWN)
+    while isTrue is True:
+        for x in range(1, 250):
 
-    prods = driver.find_elements_by_css_selector(".particle-table-row")
-    for prod in prods:
-        #specific column select
-        text = prod.find_element_by_css_selector(".name-label.with-info").text
-        if text == "224" or text == "name":
-            print(prod.text)
-            try:
-                p = prod.find_element_by_css_selector("._ngcontent"+all_product+"42")
-                print(p.get_attribute("class"))
-                if "included" in p.get_attribute("class"):
-                    driver.execute_script("arguments[0].setAttribute('class','particle-table-row active-row')", prod)
-                    print('true')
-                    plus = prod.find_element_by_css_selector(".bid-or-exclude-cell")
-                    print(plus.get_attribute("class"))
-                    # for pluss in plus:
-                    driver.execute_script("arguments[0].scrollIntoView();", plus)
-                    for x in range(1, 5):
-                        print("-" + str(x))
-                        i += 1
-                        if i == 10:
-                            print("wait")
-                            i = 0
-                        element.send_keys(Keys.PAGE_UP)
-                    plus.click()
-                    WebDriverWait(driver, 20).until(
-                        EC.visibility_of_element_located((By.CSS_SELECTOR, ".input"))
-                    )
-                    input = driver.find_element_by_css_selector(".input")
-                    input.clear()
-                    input = driver.find_element_by_css_selector(".input")
-                    input.send_keys("0.5")
+            print("-" + str(x))
+            i += 1
+            if i == 10:
+                print("wait")
+                i = 0
+            element.send_keys(Keys.PAGE_DOWN)
 
-                    save = driver.find_element_by_css_selector(".btn.btn-yes._nghost"+all_product+"22")
-                    save.send_keys(Keys.ENTER)
+        prods = driver.find_elements_by_css_selector(".particle-table-row")
+        for prod in prods:
+            #specific column select
+            text = prod.find_element_by_css_selector(".name-label.with-info").text
+            if text == str(id) or text == "name":
+                print(prod.text)
+                try:
+                    p = prod.find_element_by_css_selector("._ngcontent"+all_product+"42")
+                    print(p.get_attribute("class"))
+                    if "included" in p.get_attribute("class") or "excluded" in p.get_attribute("class"):
+                        driver.execute_script("arguments[0].setAttribute('class','particle-table-row active-row')", prod)
+                        print('true')
+                        plus = prod.find_element_by_css_selector(".bid-or-exclude-cell")
+                        print(plus.get_attribute("class"))
+                        # for pluss in plus:
+                        driver.execute_script("arguments[0].scrollIntoView();", plus)
+                        for x in range(1, 5):
+                            print("-" + str(x))
+                            i += 1
+                            if i == 10:
+                                print("wait")
+                                i = 0
+                            element.send_keys(Keys.PAGE_UP)
+                        plus.click()
+                        WebDriverWait(driver, 20).until(
+                            EC.visibility_of_element_located((By.CSS_SELECTOR, ".input"))
+                        )
+                        input = driver.find_element_by_css_selector(".input")
+                        input.clear()
+                        input = driver.find_element_by_css_selector(".input")
+                        input.send_keys(str(cpc_amount))
 
-                    print("end")
-                    driver.quit()
-            except Exception as e:
-                print(e)
-                print("error")
+                        save = driver.find_element_by_css_selector(".btn.btn-yes._nghost"+all_product+"22")
+                        save.send_keys(Keys.ENTER)
 
+                        print("end")
+                        isTrue = False
+                        break
+
+                except Exception as e:
+                    print(e)
+                    print("error: something went wrong")
+                    mainWeb(re_enter, cpc_amount, id)
+        print("next step")
+        next = driver.find_element_by_css_selector("material-button.next")
+        # break
+        if "is-disabled" in next.get_attribute("class"):
+            break
+        else:
+            next.click()
+            time.sleep(4)
+
+
+    print("-- WORK DONE --")
+    driver.quit()
 
     ########### next page for expand the category as product
     #i = 0

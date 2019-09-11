@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Gentelella Alela! | </title>
+    <title>DataTables | Gentelella</title>
 
     <!-- Bootstrap -->
     <link href="{{ static_url('vendors/bootstrap/dist/css/bootstrap.min.css')}}" rel="stylesheet">
@@ -17,96 +17,115 @@
     <link href="{{ static_url('vendors/nprogress/nprogress.css')}}" rel="stylesheet">
     <!-- iCheck -->
     <link href="{{ static_url('vendors/iCheck/skins/flat/green.css')}}" rel="stylesheet">
+    <!-- Datatables -->
+    <!--<link href="{{ static_url('vendors/datatables.net-bs/css/dataTables.bootstrap.min.css')}}" rel="stylesheet">-->
+    <!--<link href="{{ static_url('vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css')}}" rel="stylesheet">-->
+    <!--<link href="{{ static_url('vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css')}}" rel="stylesheet">-->
+    <!--<link href="{{ static_url('vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css')}}" rel="stylesheet">-->
+    <!--<link href="{{ static_url('vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css')}}" rel="stylesheet">-->
 
     <!-- Custom Theme Style -->
     <link href="{{ static_url('build/css/custom.min.css')}}" rel="stylesheet">
 
-    <script>
-        var mysql = require('mysql');
+    <style>
+      /*body {*/
+  /*font-family: Arial, sans-serif;*/
+  /*background: url(http://www.shukatsu-note.com/wp-content/uploads/2014/12/computer-564136_1280.jpg) no-repeat;*/
+  /*background-size: cover;*/
+  /*height: 100vh;*/
+/*}*/
 
+h1 {
+  text-align: center;
+  font-family: Tahoma, Arial, sans-serif;
+  color: #06D85F;
+  margin: 80px 0;
+}
 
+.box {
+  width: 40%;
+  margin: 0 auto;
+  background: rgba(255,255,255,0.2);
+  padding: 35px;
+  border: 2px solid #fff;
+  border-radius: 20px/50px;
+  background-clip: padding-box;
+  text-align: center;
+}
 
-        function el(selector) {
-            return document.getElementById(selector);
-        }
-                // el('action-btn').addEventListener('click', function(){
+.button {
+  font-size: 1em;
+  padding: 10px;
+  color: #fff;
+  border: 2px solid #06D85F;
+  border-radius: 20px/50px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease-out;
+}
+.button:hover {
+  background: #06D85F;
+}
 
-            // Get the mysql service
-            getFirstTenRows(function(rows){
-                var html = '
+/*.overlay {*/
+  /*position: fixed;*/
+  /*top: 0;*/
+  /*bottom: 0;*/
+  /*left: 0;*/
+  /*right: 0;*/
+  /*background: rgba(0, 0, 0, 0.7);*/
+  /*transition: opacity 500ms;*/
+  /*visibility: hidden;*/
+  /*opacity: 0;*/
+/*}*/
+/*.overlay:target {*/
+  /*visibility: visible;*/
+  /*opacity: 1;*/
+/*}*/
 
-                rows.forEach(function(row){
-                    // html += '<tr>';
-                    //       html += '<td>'+row.feed_id+'</td>';
-                    //       html += '<td>';
-                    //         html += '<a>'+row.title+'</a>';
-                    //         html += '<br />';
-                    //         html += '<small>'+row.status+'</small>';
-                    //       html += '</td>';
-                    //      html += '<td>'+row.price;
-                    //      html += '</td>';
-                    //     html+= '<td class="project_progress">'+row.stats_clicks;
-                    //      html+= '</td>';
-                    //      html+= '<td>'+row.stats_impressions;
-                    //      html+= '</td>';
-                    //         html+= '<td>'+row.ctr;
-                    //      html+= '</td>';
-                    //         html+= '<td>'+row.cpc;
-                    //      html+= '</td>';
-                    //         html+= '<td>'+row.stats_cost;
-                    //      html+= '</td>';
-                    //      html+= '<td>';
-                    //        html+= '<a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Edit </a>';
-                    //      html+= '</td>';
-                    //     html+= '</tr>';
-                   console.log(row);
-                });
+/*.popup {*/
+  /*margin: 70px auto;*/
+  /*padding: 20px;*/
+  /*background: #fff;*/
+  /*border-radius: 5px;*/
+  /*width: 30%;*/
+  /*position: relative;*/
+  /*transition: all 5s ease-in-out;*/
+/*}*/
 
-                document.querySelector('#tbody_new').innerHTML = html;
-            });
+/*.popup h2 {*/
+  /*margin-top: 0;*/
+  /*color: #333;*/
+  /*font-family: Tahoma, Arial, sans-serif;*/
+/*}*/
+/*.popup .close {*/
+  /*position: absolute;*/
+  /*top: 20px;*/
+  /*right: 30px;*/
+  /*transition: all 200ms;*/
+  /*font-size: 30px;*/
+  /*font-weight: bold;*/
+  /*text-decoration: none;*/
+  /*color: #333;*/
+/*}*/
+/*.popup .close:hover {*/
+  /*color: #06D85F;*/
+/*}*/
+/*.popup .content {*/
+  /*max-height: 30%;*/
+  /*overflow: auto;*/
+/*}*/
 
-        function getFirstTenRows(callback){
-            var mysql = require('mysql');
+/*@media screen and (max-width: 700px){*/
+  /*.box{*/
+    /*width: 70%;*/
+  /*}*/
+  /*.popup{*/
+    /*width: 70%;*/
+  /*}*/
+/*}*/
 
-            // Add the credentials to access your database
-            var connection = mysql.createConnection({
-                host     : 'localhost',
-                user     : 'root',
-                password : 'root',
-                database : 'feedOPT'
-            });
-
-            // connect to mysql
-            connection.connect(function(err) {
-                // in case of error
-                if(err){
-                    console.log(err.code);
-                    console.log(err.fatal);
-                }
-            });
-
-            // Perform a query
-
-            $query = "SELECT * FROM datta;";
-
-            connection.query($query, function(err, rows, fields) {
-                if(err){
-                    console.log("An error ocurred performing the query.");
-                    console.log(err);
-                    return;
-                }
-
-                callback(rows);
-
-                console.log("Query succesfully executed");
-            });
-
-            // Close the connection
-            connection.end(function(){
-                // The connection has been closed
-            });
-        }
-    </script>
+    </style>
   </head>
 
   <body class="nav-md">
@@ -115,22 +134,22 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Gentelella Alela!</span></a>
+              <a href="/" class="site_title"><i class="fa fa-paw"></i> <span>Feed Manager</span></a>
             </div>
 
             <div class="clearfix"></div>
 
-            <!-- menu profile quick info -->
-            <div class="profile clearfix">
-              <div class="profile_pic">
-                <img src="images/img.jpg" alt="..." class="img-circle profile_img">
-              </div>
-              <div class="profile_info">
-                <span>Welcome,</span>
-                <h2>John Doe</h2>
-              </div>
-            </div>
-            <!-- /menu profile quick info -->
+            <!--&lt;!&ndash; menu profile quick info &ndash;&gt;-->
+            <!--<div class="profile clearfix">-->
+              <!--<div class="profile_pic">-->
+                <!--<img src="images/img.jpg" alt="..." class="img-circle profile_img">-->
+              <!--</div>-->
+              <!--<div class="profile_info">-->
+                <!--<span>Welcome,</span>-->
+                <!--<h2>John Doe</h2>-->
+              <!--</div>-->
+            <!--</div>-->
+            <!--&lt;!&ndash; /menu profile quick info &ndash;&gt;-->
 
             <br />
 
@@ -140,98 +159,98 @@
                 <h3>General</h3>
                 <ul class="nav side-menu">
                   <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="index.html">Dashboard</a></li>
-                      <li><a href="index2.html">Dashboard2</a></li>
-                      <li><a href="index3.html">Dashboard3</a></li>
-                    </ul>
+                    <!--<ul class="nav child_menu">-->
+                      <!--<li><a href="index.html">Dashboard</a></li>-->
+                      <!--<li><a href="index2.html">Dashboard2</a></li>-->
+                      <!--<li><a href="index3.html">Dashboard3</a></li>-->
+                    <!--</ul>-->
                   </li>
-                  <li><a><i class="fa fa-edit"></i> Forms <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="form.html">General Form</a></li>
-                      <li><a href="form_advanced.html">Advanced Components</a></li>
-                      <li><a href="form_validation.html">Form Validation</a></li>
-                      <li><a href="form_wizards.html">Form Wizard</a></li>
-                      <li><a href="form_upload.html">Form Upload</a></li>
-                      <li><a href="form_buttons.html">Form Buttons</a></li>
-                    </ul>
-                  </li>
-                  <li><a><i class="fa fa-desktop"></i> UI Elements <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="general_elements.html">General Elements</a></li>
-                      <li><a href="media_gallery.html">Media Gallery</a></li>
-                      <li><a href="typography.html">Typography</a></li>
-                      <li><a href="icons.html">Icons</a></li>
-                      <li><a href="glyphicons.html">Glyphicons</a></li>
-                      <li><a href="widgets.html">Widgets</a></li>
-                      <li><a href="invoice.html">Invoice</a></li>
-                      <li><a href="inbox.html">Inbox</a></li>
-                      <li><a href="calendar.html">Calendar</a></li>
-                    </ul>
-                  </li>
-                  <li><a><i class="fa fa-table"></i> Tables <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="tables.html">Tables</a></li>
-                      <li><a href="tables_dynamic.html">Table Dynamic</a></li>
-                    </ul>
-                  </li>
-                  <li><a><i class="fa fa-bar-chart-o"></i> Data Presentation <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="chartjs.html">Chart JS</a></li>
-                      <li><a href="chartjs2.html">Chart JS2</a></li>
-                      <li><a href="morisjs.html">Moris JS</a></li>
-                      <li><a href="echarts.html">ECharts</a></li>
-                      <li><a href="other_charts.html">Other Charts</a></li>
-                    </ul>
-                  </li>
-                  <li><a><i class="fa fa-clone"></i>Layouts <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="fixed_sidebar.html">Fixed Sidebar</a></li>
-                      <li><a href="fixed_footer.html">Fixed Footer</a></li>
-                    </ul>
-                  </li>
-                </ul>
-              </div>
-              <div class="menu_section">
-                <h3>Live On</h3>
-                <ul class="nav side-menu">
-                  <li><a><i class="fa fa-bug"></i> Additional Pages <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="e_commerce.html">E-commerce</a></li>
-                      <li><a href="projects.html">Projects</a></li>
-                      <li><a href="project_detail.html">Project Detail</a></li>
-                      <li><a href="contacts.html">Contacts</a></li>
-                      <li><a href="profile.html">Profile</a></li>
-                    </ul>
-                  </li>
-                  <li><a><i class="fa fa-windows"></i> Extras <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="page_403.html">403 Error</a></li>
-                      <li><a href="page_404.html">404 Error</a></li>
-                      <li><a href="page_500.html">500 Error</a></li>
-                      <li><a href="plain_page.html">Plain Page</a></li>
-                      <li><a href="login.html">Login Page</a></li>
-                      <li><a href="pricing_tables.html">Pricing Tables</a></li>
-                    </ul>
-                  </li>
-                  <li><a><i class="fa fa-sitemap"></i> Multilevel Menu <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                        <li><a href="#level1_1">Level One</a>
-                        <li><a>Level One<span class="fa fa-chevron-down"></span></a>
-                          <ul class="nav child_menu">
-                            <li class="sub_menu"><a href="level2.html">Level Two</a>
-                            </li>
-                            <li><a href="#level2_1">Level Two</a>
-                            </li>
-                            <li><a href="#level2_2">Level Two</a>
-                            </li>
-                          </ul>
-                        </li>
-                        <li><a href="#level1_2">Level One</a>
-                        </li>
-                    </ul>
-                  </li>
-                  <li><a href="javascript:void(0)"><i class="fa fa-laptop"></i> Landing Page <span class="label label-success pull-right">Coming Soon</span></a></li>
+                  <!--<li><a><i class="fa fa-edit"></i> Forms <span class="fa fa-chevron-down"></span></a>-->
+                    <!--<ul class="nav child_menu">-->
+                      <!--<li><a href="form.html">General Form</a></li>-->
+                      <!--<li><a href="form_advanced.html">Advanced Components</a></li>-->
+                      <!--<li><a href="form_validation.html">Form Validation</a></li>-->
+                      <!--<li><a href="form_wizards.html">Form Wizard</a></li>-->
+                      <!--<li><a href="form_upload.html">Form Upload</a></li>-->
+                      <!--<li><a href="form_buttons.html">Form Buttons</a></li>-->
+                    <!--</ul>-->
+                  <!--</li>-->
+                  <!--<li><a><i class="fa fa-desktop"></i> UI Elements <span class="fa fa-chevron-down"></span></a>-->
+                    <!--<ul class="nav child_menu">-->
+                      <!--<li><a href="general_elements.html">General Elements</a></li>-->
+                      <!--<li><a href="media_gallery.html">Media Gallery</a></li>-->
+                      <!--<li><a href="typography.html">Typography</a></li>-->
+                      <!--<li><a href="icons.html">Icons</a></li>-->
+                      <!--<li><a href="glyphicons.html">Glyphicons</a></li>-->
+                      <!--<li><a href="widgets.html">Widgets</a></li>-->
+                      <!--<li><a href="invoice.html">Invoice</a></li>-->
+                      <!--<li><a href="inbox.html">Inbox</a></li>-->
+                      <!--<li><a href="calendar.html">Calendar</a></li>-->
+                    <!--</ul>-->
+                  <!--</li>-->
+                  <!--<li><a><i class="fa fa-table"></i> Tables <span class="fa fa-chevron-down"></span></a>-->
+                    <!--<ul class="nav child_menu">-->
+                      <!--<li><a href="tables.html">Tables</a></li>-->
+                      <!--<li><a href="tables_dynamic.html">Table Dynamic</a></li>-->
+                    <!--</ul>-->
+                  <!--</li>-->
+                  <!--<li><a><i class="fa fa-bar-chart-o"></i> Data Presentation <span class="fa fa-chevron-down"></span></a>-->
+                    <!--<ul class="nav child_menu">-->
+                      <!--<li><a href="chartjs.html">Chart JS</a></li>-->
+                      <!--<li><a href="chartjs2.html">Chart JS2</a></li>-->
+                      <!--<li><a href="morisjs.html">Moris JS</a></li>-->
+                      <!--<li><a href="echarts.html">ECharts</a></li>-->
+                      <!--<li><a href="other_charts.html">Other Charts</a></li>-->
+                    <!--</ul>-->
+                  <!--</li>-->
+                  <!--<li><a><i class="fa fa-clone"></i>Layouts <span class="fa fa-chevron-down"></span></a>-->
+                    <!--<ul class="nav child_menu">-->
+                      <!--<li><a href="fixed_sidebar.html">Fixed Sidebar</a></li>-->
+                      <!--<li><a href="fixed_footer.html">Fixed Footer</a></li>-->
+                    <!--</ul>-->
+                  <!--</li>-->
+                <!--</ul>-->
+              <!--</div>-->
+              <!--<div class="menu_section">-->
+                <!--<h3>Live On</h3>-->
+                <!--<ul class="nav side-menu">-->
+                  <!--<li><a><i class="fa fa-bug"></i> Additional Pages <span class="fa fa-chevron-down"></span></a>-->
+                    <!--<ul class="nav child_menu">-->
+                      <!--<li><a href="e_commerce.html">E-commerce</a></li>-->
+                      <!--<li><a href="projects.html">Projects</a></li>-->
+                      <!--<li><a href="project_detail.html">Project Detail</a></li>-->
+                      <!--<li><a href="contacts.html">Contacts</a></li>-->
+                      <!--<li><a href="profile.html">Profile</a></li>-->
+                    <!--</ul>-->
+                  <!--</li>-->
+                  <!--<li><a><i class="fa fa-windows"></i> Extras <span class="fa fa-chevron-down"></span></a>-->
+                    <!--<ul class="nav child_menu">-->
+                      <!--<li><a href="page_403.html">403 Error</a></li>-->
+                      <!--<li><a href="page_404.html">404 Error</a></li>-->
+                      <!--<li><a href="page_500.html">500 Error</a></li>-->
+                      <!--<li><a href="plain_page.html">Plain Page</a></li>-->
+                      <!--<li><a href="login.html">Login Page</a></li>-->
+                      <!--<li><a href="pricing_tables.html">Pricing Tables</a></li>-->
+                    <!--</ul>-->
+                  <!--</li>-->
+                  <!--<li><a><i class="fa fa-sitemap"></i> Multilevel Menu <span class="fa fa-chevron-down"></span></a>-->
+                    <!--<ul class="nav child_menu">-->
+                        <!--<li><a href="#level1_1">Level One</a>-->
+                        <!--<li><a>Level One<span class="fa fa-chevron-down"></span></a>-->
+                          <!--<ul class="nav child_menu">-->
+                            <!--<li class="sub_menu"><a href="level2.html">Level Two</a>-->
+                            <!--</li>-->
+                            <!--<li><a href="#level2_1">Level Two</a>-->
+                            <!--</li>-->
+                            <!--<li><a href="#level2_2">Level Two</a>-->
+                            <!--</li>-->
+                          <!--</ul>-->
+                        <!--</li>-->
+                        <!--<li><a href="#level1_2">Level One</a>-->
+                        <!--</li>-->
+                    <!--</ul>-->
+                  <!--</li>-->
+                  <!--<li><a href="javascript:void(0)"><i class="fa fa-laptop"></i> Landing Page <span class="label label-success pull-right">Coming Soon</span></a></li>-->
                 </ul>
               </div>
 
@@ -359,17 +378,36 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Projects <small>Listing design</small></h3>
+                <h3>Users <small>Some examples to get you started</small></h3>
               </div>
 
               <div class="title_right">
                 <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+
                   <div class="input-group">
                     <input type="text" class="form-control" placeholder="Search for...">
                     <span class="input-group-btn">
                       <button class="btn btn-default" type="button">Go!</button>
+
                     </span>
                   </div>
+                  <form method="post">
+                  <select name="Day">
+                     <option value="{{day}}" selected>{{day}}</option>
+                    <option value=""> ---------</option>
+                <option value="Today">Today</option>
+                <option value="Yesterday">Yesterday</option>
+                <option value="ThisWeek">This week (Sun – Today)</option>
+                <option value="Last7">Last 7 days</option>
+                <option value="LastWeek">Last week (Sun – Sat)</option>
+                <option value="Last14">Last 14 days</option>
+                <option value="ThisMonth">This month</option>
+                <option value="Last30">Last 30 days</option>
+                <option value="LastMonth">Last month</option>
+                <option value="Alltime">All time</option>
+                </select>
+                    <input type="submit" value="Select">
+                    </form>
                 </div>
               </div>
             </div>
@@ -377,10 +415,10 @@
             <div class="clearfix"></div>
 
             <div class="row">
-              <div class="col-md-12">
+              <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Projects</h2>
+                    <h2>All Products <small></small></h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -400,31 +438,35 @@
                   </div>
                   <div class="x_content">
 
-                    <p>Simple table with project listing with progress and editing options</p>
-
-                    <!-- start project list -->
-                    <table class="table table-striped projects">
+                    <table  id="indextable" class="table table-striped">
                       <thead>
                         <tr>
-                          <th style="width: 1%">#</th>
-                          <th style="width: 30%">Title</th>
-                          <th>Price</th>
-                          <th>Project Progress</th>
-                          <th>Impr.</th>
-                          <th >#Edit</th>
-                          <th>Impr.</th>
-                          <th>Impr.</th>
-                          <th>Impr.</th>
+                          <th><a href="javascript:SortTable(0,'N');">#</a></th>
+                          <th><a href="javascript:SortTable(1,'T');">Title</a></th>
+                          <th><a href="javascript:SortTable(2,'T');">Product Status</a></th>
+                          <th><a href="javascript:SortTable(3,'T');">Price</a></th>
+                          <th><a href="javascript:SortTable(4,'N');">Clicks</a></th>
+                          <th><a href="javascript:SortTable(5,'N');">Impr.</a></th>
+                          <th><a href="javascript:SortTable(6,'N');">CTP</a></th>
+                          <th><a href="javascript:SortTable(7,'N');">Avg. CPC</a></th>
+                          <th><a href="javascript:SortTable(8,'N');">Cost</a></th>
+                          <th><a href="javascript:SortTable(9,'N');">CPC</a></th>
+                          <!--<th></th>-->
+                          <th><a href="javascript:SortTable(10,'T');">Edit</a></th>
                         </tr>
                       </thead>
-                      <tbody id="tbody_new">
-                        {% for t in product%}
+
+
+                      <tbody>
+
+                        {% for t in product %}
+                        <form method="post">
                      <tr>
                          <td>{{t[0]}}</td>
                          <td>
-                           <a>{{t[1]}}</a>
+                           <a>{{t[2]}}</a>
                            <br />
-                           <small>{{t[2]}}</small>
+                           <small>{{t[1]}}</small>
                          </td>
                         <td>{{t[3]}}
                         </td>
@@ -436,35 +478,213 @@
                         </td>
                            <td>{{t[7]}}
                         </td>
-                           <td>{{t[8]}}
+                        <td>{{t[8]}}
                         </td>
-                        <td>
-                          <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Edit </a>
+                         <td>{{t[9]}}
+                           <td>
+
+                         <input id="cpc" type="text" name="cpc" value={% for cpc in product_group %}
+                                      {% if cpc[0] == t[0] %}
+                                        {{ cpc[5] }}
+                                      {% end %}
+                                {% end %}>
+
+                        <input id="id_number" type="hidden" name="id_number" value={{t[0]}}>
+
+                       </td>
+                       <td>
+                         <input type="submit"/>
+                          <!--<a href="?id={{t[0]}}" onclick="myFunction()" id="myBtn"> Edit </a>-->
+                        <!--<a href="?id={{t[0]}}" class="button btn btn-danger btn-xs" id="myBtn"><i class="fa fa-trash-o"></i> Edit </a>-->
+                             <!--Modal content-->
+                            <!--<div id="popup1" class="overlay">-->
+                              <!--<div class="popup">-->
+                                  <!--<h2>Here am</h2>-->
+                                  <!--<a class="close" href="#">&times;</a>-->
+                                  <!--<div class="content">-->
+                                  <!--</div>-->
+                              <!--</div>-->
+                          <!--</div>-->
                         </td>
+                       <!--<td>-->
+                         <!--<input type="submit"/>-->
+                       <!--</td>-->
                        </tr>
+                          </form>
+
+
+
                         {% end %}
                       </tbody>
                     </table>
-                    <!-- end project list -->
-
                   </div>
                 </div>
               </div>
+
             </div>
           </div>
         </div>
         <!-- /page content -->
 
         <!-- footer content -->
-        <footer>
-          <div class="pull-right">
-            Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
-          </div>
-          <div class="clearfix"></div>
-        </footer>
+
         <!-- /footer content -->
       </div>
     </div>
+
+
+<!--<script>-->
+<!--// Get the modal-->
+<!--var modal = document.getElementById("myModal");-->
+
+<!--// Get the button that opens the modal-->
+<!--var btn = document.getElementById("myBtn");-->
+
+<!--// Get the <span> element that closes the modal-->
+<!--var span = document.getElementsByClassName("close")[0];-->
+
+<!--// When the user clicks the button, open the modal-->
+<!--btn.onclick = function() {-->
+  <!--modal.style.display = "block";-->
+<!--}-->
+
+<!--// When the user clicks on <span> (x), close the modal-->
+<!--span.onclick = function() {-->
+  <!--modal.style.display = "none";-->
+<!--}-->
+
+<!--// When the user clicks anywhere outside of the modal, close it-->
+<!--window.onclick = function(event) {-->
+  <!--if (event.target == modal) {-->
+    <!--modal.style.display = "none";-->
+  <!--}-->
+<!--}-->
+<!--</script>-->
+
+
+<script type="text/javascript">
+/*
+   Willmaster Table Sort
+   Version 1.1
+   August 17, 2016
+   Updated GetDateSortingKey() to correctly sort two-digit months and days numbers with leading 0.
+   Version 1.0, July 3, 2011
+
+   Will Bontrager
+   https://www.willmaster.com/
+   Copyright 2011,2016 Will Bontrager Software, LLC
+
+   This software is provided "AS IS," without
+   any warranty of any kind, without even any
+   implied warranty such as merchantability
+   or fitness for a particular purpose.
+   Will Bontrager Software, LLC grants
+   you a royalty free license to use or
+   modify this software provided this
+   notice appears on all copies.
+*/
+//
+// One placed to customize - The id value of the table tag.
+
+var TableIDvalue = "indextable";
+
+//
+//////////////////////////////////////
+var TableLastSortedColumn = -1;
+function SortTable() {
+var sortColumn = parseInt(arguments[0]);
+var type = arguments.length > 1 ? arguments[1] : 'T';
+var dateformat = arguments.length > 2 ? arguments[2] : '';
+var table = document.getElementById(TableIDvalue);
+var tbody = table.getElementsByTagName("tbody")[0];
+var rows = tbody.getElementsByTagName("tr");
+var arrayOfRows = new Array();
+type = type.toUpperCase();
+dateformat = dateformat.toLowerCase();
+for(var i=0, len=rows.length; i<len; i++) {
+	arrayOfRows[i] = new Object;
+	arrayOfRows[i].oldIndex = i;
+	var celltext = rows[i].getElementsByTagName("td")[sortColumn].innerHTML.replace(/<[^>]*>/g,"");
+	if( type=='D' ) { arrayOfRows[i].value = GetDateSortingKey(dateformat,celltext); }
+	else {
+		var re = type=="N" ? /[^\.\-\+\d]/g : /[^a-zA-Z0-9]/g;
+		arrayOfRows[i].value = celltext.replace(re,"").substr(0,25).toLowerCase();
+		}
+	}
+if (sortColumn == TableLastSortedColumn) { arrayOfRows.reverse(); }
+else {
+	TableLastSortedColumn = sortColumn;
+	switch(type) {
+		case "N" : arrayOfRows.sort(CompareRowOfNumbers); break;
+		case "D" : arrayOfRows.sort(CompareRowOfNumbers); break;
+		default  : arrayOfRows.sort(CompareRowOfText);
+		}
+	}
+var newTableBody = document.createElement("tbody");
+for(var i=0, len=arrayOfRows.length; i<len; i++) {
+	newTableBody.appendChild(rows[arrayOfRows[i].oldIndex].cloneNode(true));
+	}
+table.replaceChild(newTableBody,tbody);
+} // function SortTable()
+
+function CompareRowOfText(a,b) {
+var aval = a.value;
+var bval = b.value;
+return( aval == bval ? 0 : (aval > bval ? 1 : -1) );
+} // function CompareRowOfText()
+
+function CompareRowOfNumbers(a,b) {
+var aval = /\d/.test(a.value) ? parseFloat(a.value) : 0;
+var bval = /\d/.test(b.value) ? parseFloat(b.value) : 0;
+return( aval == bval ? 0 : (aval > bval ? 1 : -1) );
+} // function CompareRowOfNumbers()
+
+function GetDateSortingKey(format,text) {
+if( format.length < 1 ) { return ""; }
+format = format.toLowerCase();
+text = text.toLowerCase();
+text = text.replace(/^[^a-z0-9]*/,"");
+text = text.replace(/[^a-z0-9]*$/,"");
+if( text.length < 1 ) { return ""; }
+text = text.replace(/[^a-z0-9]+/g,",");
+var date = text.split(",");
+if( date.length < 3 ) { return ""; }
+var d=0, m=0, y=0;
+for( var i=0; i<3; i++ ) {
+	var ts = format.substr(i,1);
+	if( ts == "d" ) { d = date[i]; }
+	else if( ts == "m" ) { m = date[i]; }
+	else if( ts == "y" ) { y = date[i]; }
+	}
+d = d.replace(/^0/,"");
+if( d < 10 ) { d = "0" + d; }
+if( /[a-z]/.test(m) ) {
+	m = m.substr(0,3);
+	switch(m) {
+		case "jan" : m = String(1); break;
+		case "feb" : m = String(2); break;
+		case "mar" : m = String(3); break;
+		case "apr" : m = String(4); break;
+		case "may" : m = String(5); break;
+		case "jun" : m = String(6); break;
+		case "jul" : m = String(7); break;
+		case "aug" : m = String(8); break;
+		case "sep" : m = String(9); break;
+		case "oct" : m = String(10); break;
+		case "nov" : m = String(11); break;
+		case "dec" : m = String(12); break;
+		default    : m = String(0);
+		}
+	}
+m = m.replace(/^0/,"");
+if( m < 10 ) { m = "0" + m; }
+y = parseInt(y);
+if( y < 100 ) { y = parseInt(y) + 2000; }
+return "" + String(y) + "" + String(m) + "" + String(d) + "";
+} // function GetDateSortingKey()
+</script>
+
+
 
     <!-- jQuery -->
     <script src="{{ static_url('vendors/jquery/dist/jquery.min.js')}}"></script>
@@ -474,11 +694,27 @@
     <script src="{{ static_url('vendors/fastclick/lib/fastclick.js')}}"></script>
     <!-- NProgress -->
     <script src="{{ static_url('vendors/nprogress/nprogress.js')}}"></script>
-    <!-- bootstrap-progressbar -->
-    <script src="{{ static_url('vendors/bootstrap-progressbar/bootstrap-progressbar.min.js')}}"></script>
+    <!-- iCheck -->
+    <script src="{{ static_url('vendors/iCheck/icheck.min.js')}}"></script>
+    <!-- Datatables -->
+    <!--<script src="{{ static_url('vendors/datatables.net/js/jquery.dataTables.min.js')}}"></script>-->
+    <!--<script src="{{ static_url('vendors/datatables.net-bs/js/dataTables.bootstrap.min.js')}}"></script>-->
+    <!--<script src="{{ static_url('vendors/datatables.net-buttons/js/dataTables.buttons.min.js')}}"></script>-->
+    <!--<script src="{{ static_url('vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js')}}"></script>-->
+    <!--<script src="{{ static_url('vendors/datatables.net-buttons/js/buttons.flash.min.js')}}"></script>-->
+    <!--<script src="{{ static_url('vendors/datatables.net-buttons/js/buttons.html5.min.js')}}"></script>-->
+    <!--<script src="{{ static_url('vendors/datatables.net-buttons/js/buttons.print.min.js')}}"></script>-->
+    <!--<script src="{{ static_url('vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js')}}"></script>-->
+    <!--<script src="{{ static_url('vendors/datatables.net-keytable/js/dataTables.keyTable.min.js')}}"></script>-->
+    <!--<script src="{{ static_url('vendors/datatables.net-responsive/js/dataTables.responsive.min.js')}}"></script>-->
+    <!--<script src="{{ static_url('vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js')}}"></script>-->
+    <!--<script src="{{ static_url('vendors/datatables.net-scroller/js/dataTables.scroller.min.js')}}"></script>-->
+    <!--<script src="{{ static_url('vendors/jszip/dist/jszip.min.js')}}"></script>-->
+    <!--<script src="{{ static_url('vendors/pdfmake/build/pdfmake.min.js')}}"></script>-->
+    <!--<script src="{{ static_url('vendors/pdfmake/build/vfs_fonts.js')}}"></script>-->
 
     <!-- Custom Theme Scripts -->
     <script src="{{ static_url('build/js/custom.min.js')}}"></script>
+
   </body>
 </html>
-
